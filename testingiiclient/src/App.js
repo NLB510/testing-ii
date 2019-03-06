@@ -12,9 +12,38 @@ class App extends Component {
     fouls: 0
   };
 
-  hit = () => {};
-  strike = () => {};
-  ball = () => {};
+  hit = e => {
+    e.preventDefault();
+
+    this.setState({
+      strikes: 0,
+      balls: 0,
+      fouls: 0
+    })
+
+  };
+
+  strike = e => {
+    e.preventDefault();
+
+    if(this.state.strikes < 3 && this.state.balls < 4) {
+
+      this.setState(prevState => {
+        return {
+          strikes: prevState.strikes + 1
+        };
+      });
+    } else {
+      this.setState({
+        strikes: 0
+      })
+    }
+  };
+
+  ball = e => {
+    e.preventDefault();
+  };
+
   foul = () => {};
 
   render() {
@@ -32,7 +61,7 @@ class App extends Component {
             render={props => (
               <Dashboard
                 {...props}
-                atBat={this.state}
+                stats={this.state}
                 recordHit={this.hit}
                 recordStrike={this.strike}
                 recordBall={this.ball}
