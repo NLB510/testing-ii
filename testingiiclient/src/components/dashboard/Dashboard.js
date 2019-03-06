@@ -8,8 +8,8 @@ const Dashboard = props => {
       <h1>At Bat Dashboard</h1>
       <div>
         <h2>Strikes: <span data-testid='strikeCount'>{strikes}</span></h2>
-        <h2>Balls: {balls}</h2>
-        <h2>Fouls: {fouls}</h2>
+        <h2>Balls: <span data-testid='ballCount'>{balls}</span></h2>
+        <h2>Fouls: <span data-testid='foulCount'>{fouls}</span></h2>
       </div>
 
       <div>

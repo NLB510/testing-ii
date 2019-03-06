@@ -26,7 +26,7 @@ class App extends Component {
   strike = e => {
     e.preventDefault();
 
-    if(this.state.strikes < 3 && this.state.balls < 4) {
+    if(this.state.strikes < 2 && this.state.balls <= 3) {
 
       this.setState(prevState => {
         return {
@@ -35,16 +35,50 @@ class App extends Component {
       });
     } else {
       this.setState({
-        strikes: 0
+        strikes: 0,
+        balls: 0,
+        fouls: 0
       })
     }
   };
 
   ball = e => {
     e.preventDefault();
+
+    if (this.state.strikes <= 2 && this.state.balls < 3) {
+
+      this.setState(prevState => {
+        return {
+          balls: prevState.balls + 1
+        };
+      });
+    } else {
+      this.setState({
+        balls: 0,
+        strikes: 0
+      })
+    }
+
   };
 
-  foul = () => {};
+  foul = () => {
+
+    if (this.state.strikes <= 2 && this.state.balls <= 3 && this.state.fouls < 3) {
+
+      this.setState(prevState => {
+        return {
+          fouls: prevState.fouls + 1
+        };
+      });
+    } else {
+      this.setState({
+        strikes: 0,
+        balls: 0,
+        fouls: 0
+      })
+    }
+
+  };
 
   render() {
     return (
@@ -53,7 +87,7 @@ class App extends Component {
           <NavLink to="/">Dashboard</NavLink>
           <NavLink to="/display">Display</NavLink>
         </div>
-        <h2>At Bat Tracker</h2>
+        
         <div>
           <Route
             exact
@@ -71,7 +105,7 @@ class App extends Component {
           />
           <Route
             path="/display"
-            render={props => <Display {...props} atBat={this.state} />}
+            render={props => <Display {...props} stats={this.state} />}
           />
         </div>
       </div>
