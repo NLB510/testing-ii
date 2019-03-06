@@ -19,6 +19,8 @@ describe("<Dashboard />", () => {
 
   // };
 
+  
+
   describe('Buttons', () => {
     it("should fire strike button", () => {
       const { getByTestId } = render(
@@ -64,5 +66,27 @@ describe("<Dashboard />", () => {
       expect(mockCallBack).toHaveBeenCalled();
     });
   })
+
+
+  describe('Display', () => {
+
+    it('should display numbers', () => {
+      const { getByTestId } = render(<Dashboard stats={state} />)
+
+      const strikeCount = getByTestId('strikeCount').textContent;
+      const ballCount = getByTestId('ballCount').textContent;
+      const foulCount = getByTestId('foulCount').textContent;
+
+      expect(strikeCount).toEqual('0');
+      expect(ballCount).toEqual('0');
+      expect(foulCount).toEqual('0');
+
+    })
+
+
+  })
+
+
+
   
 });
